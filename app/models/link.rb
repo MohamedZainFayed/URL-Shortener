@@ -1,8 +1,15 @@
 class Link < ApplicationRecord
-    validates :url, presence: true, uniqueness: true, length: { within: 3..255 }
+    validates :url, presence: true, uniqueness: true, length: { within: 10..255 }
     validates :slug, presence: true, uniqueness: true, length: { within: 3..255 }
 
     before_validation :generate_slug
+
+    def self.init user_params
+        user_params[:url] = "http://#{user_params[:url].strip.downcase.gsub(/(https?:\/\/)|(www\.)/,"")}"
+        link_from_db = find_by_url(user_params[:url])
+        return link_from_db if link_from_db
+        new(user_params)
+    end
 
     private
     
