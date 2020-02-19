@@ -2,19 +2,18 @@ require 'rails_helper'
 
 RSpec.describe Link, type: :model do
   subject { Link.new(url: "https://www.google.com") }
-
-  before { subject.save }
-
+  
   it 'URL should not be null' do
     subject.url = nil
     expect(subject).not_to be_valid
   end
 
-  it 'Slug should not be null' do
-    subject.slug = nil
-    expect(subject).not_to be_valid
+  it 'Should contain a Slug after validation' do
+    expect(subject).to be_valid
+    expect(subject.slug).not_to be_nil
+    expect(subject.slug).not_to be_empty
   end
-
+  
   it 'URL should be unique' do
     link_with_same_url = Link.new(url: "https://www.facebook.com")
     link_with_same_url.save
