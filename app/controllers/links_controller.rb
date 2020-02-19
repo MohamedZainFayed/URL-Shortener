@@ -16,6 +16,8 @@ class LinksController < ApplicationController
   def redirect_slug
     link = Link.find_by_slug(params[:slug])
     raise ActionController::RoutingError.new('Not Found') if link.nil?
+    link.visits += 1
+    link.save
     redirect_to link.url
   end
 
