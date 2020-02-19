@@ -1,4 +1,4 @@
 <ul>
     <li> <%= link_to "#{request.base_url}/#{@link.slug}", "#{request.base_url}/#{@link.slug}", id: "short-link" %> - <%= @link.url %></li>
 </ul>
-<%= link_to '<button>Create another link</button>'.html_safe, root_path %>
+<%= link_to 'Create another link'.html_safe, root_path, class: 'btn btn-success' %>
