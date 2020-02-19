@@ -13,12 +13,13 @@
 ActiveRecord::Schema.define(version: 2020_02_18_225710) do
 
   create_table "links", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "url", null: false
+    t.string "url"
     t.string "slug"
     t.integer "visits", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["slug"], name: "index_links_on_slug", unique: true
+    t.index ["url"], name: "index_links_on_url", unique: true
   end
 
 end
