@@ -37,4 +37,24 @@ RSpec.describe Link, type: :model do
     subject.slug = "A" * 256
     expect(subject).not_to be_valid
   end
+
+  it 'Same URLs with different prefix -http, https, www.- should have same slug' do
+    urls = [
+      "https://google.com",
+      "http://google.com",
+      "https://www.google.com",
+      "www.google.com",
+      "google.com"
+    ]
+    links = []
+    urls.each do |url|
+      link = Link.init(url: url)
+      link.save
+      links << link
+    end
+    first_slug = links.first.slug
+    links.each do |link|
+      expect(link.slug).to eq(first_slug)
+    end
+  end
 end
