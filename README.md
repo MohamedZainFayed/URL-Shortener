@@ -13,6 +13,6 @@ export DATABASE_PASSWORD=yourDatabasePassword
 ```
 **Last**, run `rails s` to get the server up and running.
 
-##Testing
+## Testing
 
 To run the test cases, just run the command `rspec` in the project directory to execute all the test cases!
