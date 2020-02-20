@@ -34,5 +34,21 @@ RSpec.describe LinksController, type: :request do
         it "Invalid short links should raise Not Found error" do
             expect { visit "/invalid_slug" }.to raise_error("Not Found")
         end
+
+        subject { Link.init(url: "gmail.com")}
+
+        it "Short link should redirect to the correct long URL" do
+            subject.save
+            get "/#{subject.slug}"
+            expect(response).to redirect_to(subject.url)
+        end
+
+        it 'Visits should increase by 1 every time the short link is visited' do
+            subject.save
+            for i in 1..10
+                get "/#{subject.slug}"
+                expect(assigns(:link).visits).to equal(i)
+            end
+        end
     end
 end
