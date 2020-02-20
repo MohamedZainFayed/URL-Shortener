@@ -14,7 +14,7 @@ class Link < ApplicationRecord
     private
     
     def generate_slug
-        self.slug = "#{Link.last.id + 1}#{SecureRandom.uuid[0..7]}" if self.slug.nil? || self.slug.empty?
+        self.slug = "#{Link.last ? Link.last.id + 1 : 1}#{SecureRandom.uuid[0..7]}" if self.slug.nil? || self.slug.empty?
         true
     end
 end
