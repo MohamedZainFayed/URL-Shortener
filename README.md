@@ -11,6 +11,7 @@ This is a simple rails app to shorten long URLs to reasonably short links using 
 export DATABASE_USERNAME=yourDatabaseUsername
 export DATABASE_PASSWORD=yourDatabasePassword
 ```
+then run the command `rails db:setup`.
 **Last**, run `rails s` to get the server up and running.
 
 ## Testing
